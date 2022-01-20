@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/name', [App\Http\Controllers\HomeController::class, 'name']);
+Route::post('/namesave', [App\Http\Controllers\HomeController::class, 'namesave']); 
 
 

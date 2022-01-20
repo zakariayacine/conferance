@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use auth;
+use App\Models\Names;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
@@ -21,10 +22,30 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+     public function name()
     {
+        return view('name');
+    }
+     public function namesave(Request $request)
+    {
+        $validatedData = $request->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+        ]);
+        $name = new Names();
+        $name->firstname = $request->input('firstname');
+        $name->lastname = $request->input('lastname');
+        $name->email = $request->input('email');
+        $name->phone = $request->input('phone');
+        $name->user_id = Auth::id();
+        $name->save();
+        $firstname = $request->input('firstname').' '.$request->input('lastname');
         $user = $user = Auth::user();
         $jitsi = $user["jitsi-link"];
-        return view('home', compact('jitsi'));
+        return view('home', compact('jitsi','firstname'));
+
     }
+
 }

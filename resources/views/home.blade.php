@@ -7,14 +7,15 @@
                 var domain = "visio.endpschool.ml";
             var options = {
                 roomName: "{{$jitsi}}",
+                userInfo: {
+                            displayName: '{{$firstname}}'
+                        },
                 height: 600,
                 parentNode: undefined,
                 configOverwrite: {},
                 interfaceConfigOverwrite: {}
             }
              var api = new JitsiMeetExternalAPI(domain, options);
-            });
-            
-           
+            }); 
         </script>
 @endsection
