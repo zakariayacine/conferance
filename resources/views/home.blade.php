@@ -8,7 +8,7 @@
             var options = {
                 roomName: "{{$jitsi}}",
                 userInfo: {
-                            displayName: '{{$firstname}}'
+                            displayName: '<?php $_COOKIE['username'] ?>'
                         },
                 height: 600,
                 parentNode: undefined,

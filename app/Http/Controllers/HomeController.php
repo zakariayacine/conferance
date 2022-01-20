@@ -28,7 +28,8 @@ class HomeController extends Controller
     }
      public function namesave(Request $request)
     {
-        $validatedData = $request->validate([
+        if (isset($request)) {
+         $validatedData = $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
@@ -41,10 +42,12 @@ class HomeController extends Controller
         $name->phone = $request->input('phone');
         $name->user_id = Auth::id();
         $name->save();
-        $firstname = $request->input('firstname').' '.$request->input('lastname');
+        $_COOKIE['username'] = $request->input('firstname').' '.$request->input('lastname');
         $user = $user = Auth::user();
         $jitsi = $user["jitsi-link"];
-        return view('home', compact('jitsi','firstname'));
+            return view('home', compact('jitsi'));
+        }
+        return view('name');
 
     }
 
